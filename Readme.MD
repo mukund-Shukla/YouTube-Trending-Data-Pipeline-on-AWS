@@ -588,14 +588,10 @@ ORDER BY view_growth_pct ASC LIMIT 20;
 
 ## What I Would Improve Next
 
-**SCD Type 2 on channel_analytics** — Current implementation overwrites channel rankings daily, losing historical rank changes. SCD Type 2 with `effective_date`, `expiry_date`, and `is_current` flag would enable queries like "how has a channel's rank changed over 3 months?"
-
 **Backfill mechanism** — Add a `backfill_mode` boolean and `backfill_date_range` to the Step Functions input payload so the ingestion Lambda can re-fetch data for a specific date range. Currently there is no clean way to recover a missed day without manually re-running each step.
 
 **Replace DQ LIMIT with TABLESAMPLE** — The DQ Lambda uses `LIMIT 10000` for Athena sampling. At scale this should be `TABLESAMPLE BERNOULLI(10)` for a percentage-based sample without a hardcoded row ceiling.
 
 **CloudWatch custom metric for data freshness** — A Lambda that publishes a CloudWatch metric if Bronze hasn't received new data in 6+ hours, catching API key expiry or quota exhaustion before the pipeline runs.
 
-**QuickSight dashboard** — Connect Gold Athena tables to QuickSight for visual trending analysis: momentum tracking across regions, category share over time, channel rank movement.
 
-**SNS → Slack integration** — Route SNS alerts to a Slack channel via Lambda subscription for real-time pipeline monitoring without checking email.
