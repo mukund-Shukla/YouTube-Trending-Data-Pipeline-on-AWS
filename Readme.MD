@@ -35,8 +35,9 @@ A production-grade, cloud-native data pipeline built on AWS that ingests live Yo
 | `kr` | South Korea |
 | `ca` | Canada |
 
-![alt text](image.png)
-![alt text](diagram-export-5-20-2026-4_52_33-PM.png)
+![alt text](Architecture.png)
+
+![alt text](StepFnStates.png)
 ---
 ## Architecture
 
